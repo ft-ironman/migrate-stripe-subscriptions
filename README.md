@@ -1,4 +1,4 @@
-# Migrate Subscriptions from Source to Destination
+# Migrate subscriptions from Source to Destination
 Useful when migrating Stripe country accounts. For example, USA to Canada.
 
 ## Pre-req
