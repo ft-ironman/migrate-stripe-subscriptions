@@ -39,7 +39,7 @@ foreach($subscriptions as $subscription_item){
 				'billing_cycle_anchor' => strtotime($subscription_item['Current Period End (UTC)']),
 				'prorate' => false
 			]);
-			echo $subscription_item['Customer ID'];
+            fwrite($log_file, "customer_id=" . $subscription_item['Customer ID'] . "\t\tmigrated=true\t\tsubscription=active" . "\n");
 		} elseif ($subscription_item['Status'] == 'trialing') {
 			\Stripe\Subscription::create([
 				'customer' => $subscription_item['Customer ID'],
@@ -47,13 +47,14 @@ foreach($subscriptions as $subscription_item){
 				'trial_end' => strtotime($subscription_item['Trial End (UTC)']),
 				'prorate' => false
 			]);
+            fwrite($log_file, "customer_id=" . $subscription_item['Customer ID'] . "\t\tmigrated=true\t\tsubscription=trialing" . "\n");
 		} elseif ($subscription_item['Status'] == 'past_due') {
 			//ToDo: here we should handle case for users with status "past_due".
+            fwrite($log_file, "customer_id=" . $subscription_item['Customer ID'] . "\t\tmigrated=false\t\tsubscription=past_due" . "\n");
 		}
 	} catch (Exception $e) {
-		fwrite($log_file, $subscription_item['Customer ID'] . "    :");
+		fwrite($log_file, "customer_id=" . $subscription_item['Customer ID'] . "\t\tmigrated=false\t\t");
 		fwrite($log_file, 'Caught exception: ' . $e->getMessage() . "\n");
 	}
 }
 fclose($log_file);
-?>
