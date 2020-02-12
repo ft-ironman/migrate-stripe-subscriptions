@@ -7,11 +7,12 @@ composer init
 composer require stripe/stripe-php
 ```
 
-## Run Script
+## Run Scripts
 ```
 1.Update API key $source_sk_live
 2.Set subscriptions file path $csv_file_path
 
-Run Script: 
+Run Scripts: 
 php migrate-subscriptions.php
+php cancel_subscriptions.php
 ```
