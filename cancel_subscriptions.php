@@ -12,10 +12,10 @@ $index_of_subscription = 0;
 try {
     while($has_more) {
         $subscriptions = \Stripe\Subscription::all(['limit' => 100]);
+        $has_more = $subscriptions->has_more;
         foreach($subscriptions as $subscription){
             $index_of_subscription++;
             $subscription_id = $subscription->id;
-            $has_more = $subscriptions->has_more;
             $subscription->delete();
             fwrite($log_file, "subscription_id=" . $subscription_id . "\t\tdeleted=true" . "\t\tindex=" . $index_of_subscription . "\n");
         }

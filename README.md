@@ -13,6 +13,7 @@ composer require stripe/stripe-php
 2.Set subscriptions file path $csv_file_path
 
 Run Scripts: 
-php migrate-subscriptions.php
+php migrate_subscriptions.php
 php cancel_subscriptions.php
+php migrate_invoices.php
 ```
